@@ -1,0 +1,418 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --pink: #d98fa7;
+  --pink-deep: #bd6f8c;
+  --lavender: #a99acb;
+  --sage: #91aa91;
+  --gold: #d5b16e;
+  --ink: #624b53;
+  --wine: #784553;
+  --muted: #8b7279;
+  --paper: rgba(255, 253, 251, 0.93);
+  --line: rgba(120, 69, 83, 0.12);
+  --shadow: 0 28px 90px rgba(104, 65, 78, 0.13);
+  --ease-spring: cubic-bezier(0.2, 0.85, 0.25, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    background-color: #fff8f5;
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    outline: 3px solid var(--lavender);
+    outline-offset: 3px;
+  }
+}
+
+.font-serif-display {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.font-handwriting {
+  font-family: "Caveat", cursive;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Paper grid + fine ruled texture */
+.paper-canvas {
+  background:
+    radial-gradient(ellipse at 8% 10%, rgba(217, 143, 167, 0.24), transparent 34%),
+    radial-gradient(ellipse at 93% 13%, rgba(169, 154, 203, 0.22), transparent 32%),
+    radial-gradient(ellipse at 8% 95%, rgba(145, 170, 145, 0.2), transparent 35%),
+    radial-gradient(ellipse at 96% 90%, rgba(213, 177, 110, 0.22), transparent 35%),
+    #fff8f5;
+}
+
+.paper-grid-overlay {
+  opacity: 0.26;
+  background-image:
+    linear-gradient(rgba(120, 69, 83, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 69, 83, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+.paper-grain-overlay {
+  opacity: 0.18;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 4px,
+    rgba(120, 69, 83, 0.035) 5px
+  );
+}
+
+@keyframes rainbowFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes orbFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.92);
+  }
+  50% {
+    transform: translate3d(26px, -22px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-14px, 16px, 0) scale(0.98);
+  }
+}
+
+@keyframes decoFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg) scale(1);
+  }
+  50% {
+    transform: translateY(-16px) rotate(9deg) scale(1.06);
+  }
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg) scale(0.85);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.72;
+  }
+  50% {
+    transform: translate3d(42px, 50vh, 0) rotate(220deg) scale(1.05);
+  }
+  88% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(-18px, 114vh, 0) rotate(480deg) scale(0.88);
+    opacity: 0;
+  }
+}
+
+@keyframes moteRise {
+  0% {
+    transform: translate3d(0, 106vh, 0) scale(0.5);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.65;
+  }
+  80% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(var(--drift, 28px), -12vh, 0) scale(1.15);
+    opacity: 0;
+  }
+}
+
+@keyframes flowerSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes finalFlowerBob {
+  0%,
+  100% {
+    transform: rotate(-8deg) translateY(0) scale(1);
+  }
+  50% {
+    transform: rotate(8deg) translateY(-8px) scale(1.06);
+  }
+}
+
+@keyframes rippleOut {
+  to {
+    transform: scale(15);
+    opacity: 0;
+  }
+}
+
+@keyframes burstParticle {
+  0% {
+    transform: translate(0, 0) scale(0.4) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.92;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0.1) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+@keyframes stardustFade {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--sx, 0px)), calc(-50% + 18px)) scale(0.15) rotate(110deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatingHeart {
+  0% {
+    transform: translate(0, 0) scale(0.6) rotate(-8deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+    transform: translate(calc(var(--hx) * 0.2), -26px) scale(1.15) rotate(6deg);
+  }
+  100% {
+    transform: translate(var(--hx), -135px) scale(0.75) rotate(var(--hrot));
+    opacity: 0;
+  }
+}
+
+@keyframes confettiPop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.25) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.15);
+    opacity: 0;
+  }
+}
+
+@keyframes cardRevealFromDark {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.975);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes curtainFadeToBlack {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes curtainFadeFromBlack {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.88;
+  }
+  45% {
+    opacity: 0.65;
+  }
+  70% {
+    opacity: 0.36;
+  }
+  88% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes paragraphIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes headingReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    letter-spacing: -0.01em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: -0.025em;
+  }
+}
+
+@keyframes signatureDraw {
+  from {
+    width: 0%;
+    opacity: 0.2;
+  }
+  to {
+    width: 44%;
+    opacity: 0.55;
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  55%,
+  100% {
+    transform: translateX(280%) skewX(-20deg);
+  }
+}
+
+@keyframes arrowNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes gentleOrbit {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.95);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(4px, -8px, 0) rotate(14deg) scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+@keyframes auraPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.72;
+  }
+  50% {
+    transform: scale(1.16);
+    opacity: 0.95;
+  }
+}
+
+@keyframes swatchBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+
+.animate-rainbow-flow {
+  background-size: 200% 100%;
+  animation: rainbowFlow 7s ease-in-out infinite;
+}
+
+.animate-orb {
+  animation: orbFloat 13s ease-in-out infinite alternate;
+}
+
+.animate-deco {
+  animation: decoFloat 6.5s ease-in-out infinite;
+}
+
+.animate-flower-spin {
+  animation: flowerSpin 9s linear infinite;
+}
+
+.animate-final-flower {
+  animation: finalFlowerBob 3.8s ease-in-out infinite;
+}
+
+.animate-paragraph-in {
+  animation: paragraphIn 0.65s var(--ease-out) both;
+}
+
+.animate-heading-in {
+  animation: headingReveal 0.7s var(--ease-out) both;
+}
+
+.animate-arrow-nudge {
+  animation: arrowNudge 1.8s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: gentleOrbit 4.2s ease-in-out infinite;
+}
+
+.animate-aura {
+  animation: auraPulse 5.5s ease-in-out infinite;
+}
+
+.animate-btn-shimmer {
+  animation: shimmerSweep 3.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Untuk Guruku — Selamat Hari Guru 2026",
+  "description": "Surat interaktif penuh rasa hormat dan terima kasih untuk Bapak dan Ibu Guru dengan iringan musik Pagiku Cerahku.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
